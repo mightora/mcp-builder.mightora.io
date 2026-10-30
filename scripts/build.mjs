@@ -69,8 +69,9 @@ const offlineBody = [
   "<script>" + generator + "\n" + zip + "\n" + app + "</script>"
 ].join("\n");
 const offline = template
-  .replace("<!--HEAD_ASSETS-->", offlineHead)
-  .replace("<!--BODY_ASSETS-->", offlineBody)
+  .replace("<!--HEAD_ASSETS-->", () => offlineHead)
+  // A replacement callback preserves '$$' and other JS source sequences.
+  .replace("<!--BODY_ASSETS-->", () => offlineBody)
   .replaceAll("./assets/mightora-logo.png", logoData)
   .replaceAll("./assets/ian-tweedie.png", authorData)
   .replaceAll('href="./downloads/mcp-builder-offline.html"', 'href="#" aria-disabled="true"')
