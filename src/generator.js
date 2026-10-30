@@ -226,6 +226,7 @@
       "</Project>", ""
     ].join("\n");
     files["tests/QueryTests.cs"] = [
+      "using System;",
       "using MightoraMcp;",
       "using Xunit;",
       "namespace MightoraMcpTests;",
