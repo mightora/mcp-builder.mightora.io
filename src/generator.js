@@ -346,7 +346,7 @@
       "            || !string.IsNullOrEmpty(root.UserInfo) || !string.IsNullOrEmpty(root.Query) || !string.IsNullOrEmpty(root.Fragment))",
       "            throw new InvalidOperationException(\"DATAVERSE_URL must be a plain HTTPS environment URL.\");",
       "        var credential = IdentityResolver.ForCall(context);",
-      "        var token = await credential.GetTokenAsync(new TokenRequestContext([baseUrl.TrimEnd('/') + \"/.default\"]));",
+      "        var token = await credential.GetTokenAsync(new TokenRequestContext([baseUrl.TrimEnd('/') + \"/.default\"]), CancellationToken.None);",
       "        using var request = new HttpRequestMessage(HttpMethod.Get, baseUrl.TrimEnd('/') + \"/api/data/v9.2/\" + relative);",
       "        request.Headers.Authorization = new AuthenticationHeaderValue(\"Bearer\", token.Token);",
       "        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(\"application/json\"));",
