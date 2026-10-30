@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1c2f">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Mightora MCP Builder | Design secure Dataverse MCP servers</title>
+  <meta name="description" content="Design secure Dataverse MCP tools visually. Generate YAML, Azure Functions code, GitHub Actions or Azure DevOps pipelines, security guidance and tests. Free and open source.">
+  <meta name="keywords" content="Dataverse MCP server generator, MCP Builder, Azure Functions MCP, GitHub Actions ALM, Azure DevOps MCP, Dataverse permissions, MCP YAML">
+  <link rel="canonical" href="https://mcp-builder.mightora.io/">
+  <meta property="og:title" content="Mightora MCP Builder – Design. Secure. Deploy.">
+  <meta property="og:description" content="A free visual builder for custom Dataverse MCP servers with YAML definitions, identity guidance and Azure deployment pipelines.">
+  <meta property="og:url" content="https://mcp-builder.mightora.io/">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mightora MCP Builder","applicationCategory":"DeveloperApplication","operatingSystem":"Web","isAccessibleForFree":true,"license":"https://github.com/mightora/mcp-builder.mightora.io/blob/main/LICENSE","url":"https://mcp-builder.mightora.io","description":"A visual, local-first builder for secure Dataverse MCP servers and Azure Functions ALM pipelines.","author":{"@type":"Person","name":"Ian Tweedie"}}</script>
+  <!--HEAD_ASSETS-->
+</head>
+<body>
+  <a href="#builder" class="skip-link">Skip to MCP builder</a>
+  <mightora-header
+    id="brandHeader"
+    site-name="MCP Builder"
+    site-url="/"
+    logo-light="https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900.png"
+    logo-dark="https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900.png"
+    nav-links='[{"label":"Builder","url":"#builder"},{"label":"Architecture","url":"#architecture"},{"label":"Guide","url":"#guide"},{"label":"Mightora","url":"https://mightora.io","ext":true}]'>
+    <div class="fallback-brand">
+      <a href="/" aria-label="Mightora MCP Builder home"><img src="./assets/mightora-logo.png" alt="Mightora"></a>
+      <span>MCP Builder</span>
+      <nav aria-label="Main navigation"><a href="#builder">Builder</a><a href="#architecture">Architecture</a><a href="#guide">Guide</a></nav>
+    </div>
+  </mightora-header>
+  <nav class="quick-jump-nav" aria-label="Quick navigation">
+    <a href="#builder">Build your server</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#security-guide">Permissions</a>
+    <a href="#guide">ALM and testing</a>
+    <a href="#privacy">Privacy</a>
+  </nav>
+  <main>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="spark"></span> MIGHTORA / OPEN SOURCE DEVELOPER TOOLS</div>
+          <h1 id="heroTitle">Your data. <span>Your tools.</span><br>Your MCP server.</h1>
+          <p class="hero-lead">Design secure Dataverse tools without starting from code. Define what an AI assistant can do, choose whose permissions apply, and generate a deployable Azure Functions project with a proper ALM pipeline.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="#builder">Start building <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-ghost btn-lg" href="#architecture">Understand the architecture</a>
+          </div>
+          <div class="trust-row"><span>✓ Free and open source</span><span>✓ Runs in your browser</span><span>✓ No account required</span></div>
+        </div>
+        <div class="hero-visual" aria-label="Architecture: AI client to MCP server to Dataverse">
+          <div class="visual-caption">CONTROLLED ACCESS / NOT A DATABASE SHORTCUT</div>
+          <div class="mini-layer"><div class="layer-icon violet">✳</div><div><strong>AI assistant</strong><small>Presentation and orchestration</small></div><span class="layer-status">Client</span></div>
+          <div class="layer-link"><span></span><em>HTTPS + OAuth</em></div>
+          <div class="mini-layer active"><div class="layer-icon orange">▣</div><div><strong>Azure Functions MCP</strong><small>Tools, validation and policy</small></div><span class="layer-status">Boundary</span></div>
+          <div class="layer-link"><span></span><em>Authorised API request</em></div>
+          <div class="mini-layer"><div class="layer-icon blue">▤</div><div><strong>Microsoft Dataverse</strong><small>Roles, rows and column security</small></div><span class="layer-status">Data</span></div>
+          <div class="visual-bottom"><span class="dot"></span> Your security model stays in control</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="builder-section" id="builder" aria-labelledby="builderTitle">
+      <div class="container">
+        <div class="section-title-row">
+          <div><p class="section-kicker">01 / YOUR WORKSPACE</p><h2 id="builderTitle">Build your MCP definition</h2><p>Start with a working example, then shape it around your Dataverse environment.</p></div>
+          <div class="workspace-actions"><button class="btn btn-outline" id="loadExample">Load example</button><button class="btn btn-outline" id="importButton">Import YAML / JSON</button><input id="importFile" type="file" accept=".yaml,.yml,.json,text/yaml,application/json" hidden></div>
+        </div>
+        <div class="workspace">
+          <aside class="step-nav" aria-label="Builder steps">
+            <p class="step-nav-title">YOUR BUILD JOURNEY</p>
+            <button type="button" class="step-button selected" data-step="0"><span class="step-num">01</span><span><strong>Define</strong><small>Name and purpose</small></span></button>
+            <button type="button" class="step-button" data-step="1"><span class="step-num">02</span><span><strong>Tools and data</strong><small>What AI can read</small></span></button>
+            <button type="button" class="step-button" data-step="2"><span class="step-num">03</span><span><strong>Security</strong><small>User or application</small></span></button>
+            <button type="button" class="step-button" data-step="3"><span class="step-num">04</span><span><strong>Deployment</strong><small>GitHub or Azure DevOps</small></span></button>
+            <button type="button" class="step-button" data-step="4"><span class="step-num">05</span><span><strong>Generate</strong><small>Export and test</small></span></button>
+            <div class="step-help"><div class="help-icon">ⓘ</div><strong>Built with safety in mind</strong><p>Configuration stays on your device. Nothing is deployed to Azure until you choose to run your own pipeline.</p></div>
+          </aside>
+          <div class="editor">
+            <div class="editor-top"><span id="stepLabel">STEP 01 OF 05</span><span class="autosave"><span class="dot"></span><span id="saveState">Saved locally</span></span></div>
+            <section class="editor-step" data-panel="0" aria-labelledby="defineTitle">
+              <p class="editor-eyebrow">START WITH A PURPOSE</p>
+              <h3 id="defineTitle">What will your server do?</h3>
+              <p class="editor-description">A server is a collection of named tools your chosen AI client can discover and call.</p>
+              <div class="form-grid">
+                <label>Server name <small>Lowercase letters, numbers and underscores</small><input id="serverName" maxlength="64" autocomplete="off" spellcheck="false"></label>
+                <label>Server version <small>Used in the generated MCP metadata</small><input id="serverVersion" maxlength="32" spellcheck="false"></label>
+              </div>
+              <label class="field">Plain-English description<textarea id="serverDescription" rows="3" maxlength="300" placeholder="For example, help service agents locate approved customer records"></textarea></label>
+              <div class="callout"><span class="callout-icon">✦</span><div><strong>Why start with intent?</strong><p>Small, purposeful tools are easier to understand, secure and test than one unrestricted database query tool.</p></div></div>
+            </section>
+            <section class="editor-step" data-panel="1" aria-labelledby="toolsTitle" hidden>
+              <p class="editor-eyebrow">DESIGN THE CAPABILITIES</p>
+              <div class="step-heading"><div><h3 id="toolsTitle">Choose the tools to expose</h3><p class="editor-description">Select exact Dataverse entity sets and fields. This release generates read-only search and record retrieval tools.</p></div><button id="addTool" class="btn btn-secondary">+ Add tool</button></div>
+              <div class="callout compact"><span class="callout-icon">⚑</span><div><strong>Dataverse logical names matter.</strong><p>Use logical field names such as <code>accountnumber</code> and the exact entity set name, often <code>accounts</code>. Avoid display labels.</p></div></div>
+              <div id="toolCards" class="tool-cards"></div>
+            </section>
+            <section class="editor-step" data-panel="2" aria-labelledby="securityTitle" hidden>
+              <p class="editor-eyebrow">IDENTITY AND AUTHORISATION</p><h3 id="securityTitle">Whose permissions should apply?</h3>
+              <p class="editor-description">Your MCP endpoint authenticates callers first. A separate identity is then used when the server accesses Dataverse.</p>
+              <fieldset class="choice-grid"><legend class="sr-only">Dataverse execution context</legend>
+                <label class="choice"><input type="radio" name="identity" value="delegated-user"><span class="choice-content"><span class="choice-icon">◉</span><strong>Signed-in user</strong><small>On-Behalf-Of delegation. Dataverse evaluates the user's privileges and record access.</small><em>Interactive assistants</em></span></label>
+                <label class="choice"><input type="radio" name="identity" value="application"><span class="choice-content"><span class="choice-icon">▣</span><strong>Application identity</strong><small>Dedicated application user and least-privilege Dataverse security roles.</small><em>Automated services</em></span></label>
+              </fieldset>
+              <div id="identityExplanation" class="security-summary"></div>
+              <div class="guardrail-grid"><div><span class="shield">✓</span><strong>Default deny</strong><small>Only generated operations are available</small></div><div><span class="shield">✓</span><strong>Read-only</strong><small>No create, update or delete tools</small></div><div><span class="shield">✓</span><strong>Field allowlists</strong><small>Explicit columns per tool</small></div></div>
+            </section>
+            <section class="editor-step" data-panel="3" aria-labelledby="deliveryTitle" hidden>
+              <p class="editor-eyebrow">SOURCE CONTROL AND ALM</p><h3 id="deliveryTitle">Choose your deployment platform</h3>
+              <p class="editor-description">Both options generate version-controlled pipelines with a protected main branch, separate environments and a production approval gate.</p>
+              <fieldset class="choice-grid"><legend class="sr-only">Choose deployment platform</legend>
+                <label class="choice"><input type="radio" name="provider" value="github"><span class="choice-content"><span class="choice-icon">⌘</span><strong>GitHub Actions</strong><small>Pull requests, Actions workflows, OIDC and GitHub Environments.</small><em>Recommended</em></span></label>
+                <label class="choice"><input type="radio" name="provider" value="azure-devops"><span class="choice-content"><span class="choice-icon">◇</span><strong>Azure DevOps</strong><small>Azure Repos, YAML pipelines, service connections and approvals.</small><em>Enterprise teams</em></span></label>
+              </fieldset>
+              <div class="alm-flow" aria-label="Development, test and production release flow"><div><strong>Feature branch</strong><small>Validate and review</small></div><span>→</span><div><strong>Main</strong><small>Protected merge</small></div><span>→</span><div><strong>Dev</strong><small>Automatic</small></div><span>→</span><div><strong>Test</strong><small>Validate</small></div><span>→</span><div class="prod"><strong>Production</strong><small>Approval</small></div></div>
+              <p class="note">Production approvals, branch protection and Azure federation require one-time setup in your repository and Azure tenant. The export includes a guided checklist.</p>
+            </section>
+            <section class="editor-step" data-panel="4" aria-labelledby="generateTitle" hidden>
+              <p class="editor-eyebrow">READY TO SHIP</p><h3 id="generateTitle">Your server, defined as YAML</h3>
+              <p class="editor-description">Export the human-readable definition or a complete source project containing the Azure Function, tests and both ALM pipeline templates.</p>
+              <div class="summary-grid"><div><span>TOOLS</span><strong id="summaryTools">2</strong></div><div><span>EXECUTION</span><strong id="summaryIdentity">Application</strong></div><div><span>PIPELINE</span><strong id="summaryProvider">GitHub</strong></div></div>
+              <div class="download-actions"><button class="btn btn-primary" id="downloadProject">Download project ZIP ↗</button><button class="btn btn-secondary" id="downloadYaml">Download YAML</button><button class="btn btn-outline" id="downloadJson">Export JSON</button></div>
+              <p class="note">The ZIP contains source code and deployment instructions, not Azure credentials. It does not perform a deployment.</p>
+              <div id="validationReport" class="validation-report" aria-live="polite"></div>
+            </section>
+            <div class="editor-footer"><button type="button" class="btn btn-outline" id="previousStep" disabled>← Back</button><div><button type="button" class="btn btn-text" id="resetProject">Reset</button><button type="button" class="btn btn-primary" id="nextStep">Continue →</button></div></div>
+          </div>
+          <aside class="live-preview" aria-label="Live YAML preview">
+            <div class="preview-heading"><div><span class="preview-dot"></span><strong>mcp-server.yaml</strong></div><button id="copyYaml" class="copy-button" type="button">Copy</button></div>
+            <pre class="yaml-preview" tabindex="0"><code id="yamlOutput"></code></pre>
+            <div class="preview-status"><span id="validationDot" class="validation-dot"></span><span id="validationSummary">Definition valid</span></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="explain-section" id="architecture">
+      <div class="container">
+        <p class="section-kicker">02 / HOW IT WORKS</p><h2>MCP is an integration boundary.<br><span>Not a security bypass.</span></h2>
+        <p class="section-intro">An AI assistant is a presentation layer. The custom MCP server publishes carefully defined capabilities; Dataverse continues to enforce its own permissions.</p>
+        <div class="architecture-grid">
+          <article><span class="arch-number">01</span><div class="arch-symbol">✳</div><h3>AI client</h3><p>ChatGPT, VS Code, Copilot Studio or another supported MCP host interprets the request and presents the answer.</p><span class="arch-label">PRESENTATION</span></article>
+          <article><span class="arch-number">02</span><div class="arch-symbol">▣</div><h3>MCP server</h3><p>Azure Functions exposes a small set of named tools with input validation, identity checks, field allowlists and result limits.</p><span class="arch-label">INTEGRATION</span></article>
+          <article><span class="arch-number">03</span><div class="arch-symbol">▤</div><h3>Dataverse</h3><p>The Web API applies existing table, record and column security according to the delegated user or application user.</p><span class="arch-label">DATA PLATFORM</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="security-section" id="security-guide">
+      <div class="container">
+        <div class="section-title-row"><div><p class="section-kicker">03 / TRUST BY DESIGN</p><h2>Permissions are not a prompt.</h2><p>Your AI assistant cannot grant itself Dataverse privileges. The server has to enforce every operation.</p></div></div>
+        <div class="security-info-grid">
+          <article><div class="info-icon">◉</div><h3>Delegated user context</h3><p>When the host supports Entra OAuth, the Function obtains a separate Dataverse token using OBO. User-level access applies end to end.</p><a target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-on-behalf-of-flow">Read Microsoft's OBO guidance ↗</a></article>
+          <article><div class="info-icon">▣</div><h3>Application context</h3><p>A dedicated Dataverse application user receives explicit roles. MCP callers still require authentication and per-tool controls.</p><a target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authenticate-oauth">Understand Dataverse OAuth ↗</a></article>
+          <article><div class="info-icon">⚑</div><h3>Fail closed</h3><p>No arbitrary SQL or OData expressions, no default write actions, no unbounded results and no credentials committed to source control.</p><a href="#builder">Review your tool definition ↗</a></article>
+        </div>
+        <div class="security-footnote"><strong>Important:</strong> Azure Functions' built-in MCP OAuth is documented by Microsoft as a preview capability. Review the supported client and tenant configuration before using a generated server in production.</div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="guide">
+      <div class="container">
+        <p class="section-kicker">04 / DEPLOY WITH CONFIDENCE</p><h2>A guided path from YAML to production.</h2>
+        <p class="section-intro">The exported project contains a deployment guide, security review checklist and tests. Configure the environments once, then promote the same build through your ALM pipeline.</p>
+        <div class="lifecycle">
+          <div class="lifecycle-item"><span>1</span><div><strong>Make a feature branch</strong><p>Edit the YAML visually, import it back into the builder or review changes in Git.</p></div></div>
+          <div class="lifecycle-item"><span>2</span><div><strong>Validate and review</strong><p>Build, security checks, schema validation and pull request approval.</p></div></div>
+          <div class="lifecycle-item"><span>3</span><div><strong>Deploy to development and test</strong><p>Configure separate Function Apps and Dataverse environments. Test both valid and denied access.</p></div></div>
+          <div class="lifecycle-item"><span>4</span><div><strong>Approve production</strong><p>Deploy the verified artefact with a human approval and retain a rollback path.</p></div></div>
+        </div>
+        <div class="resources">
+          <div><strong>What you'll need</strong><p>Azure subscription, Dataverse environment, Entra permissions, and a GitHub or Azure DevOps repository.</p></div>
+          <div><strong>How you'll test</strong><p>Use MCP Inspector, a supported host and restricted test identities to check security boundaries.</p></div>
+          <div><strong>What you own</strong><p>The YAML, generated source, Azure resources, access controls and complete deployment history.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="privacy-section" id="privacy">
+      <div class="container">
+        <div class="privacy-card"><div><p class="section-kicker">05 / PRIVACY AND TRANSPARENCY</p><h2>Your design stays yours.</h2><p>The builder processes your server definition in your browser and saves it locally on this device. It does not request Dataverse credentials or send your table definitions to Mightora.</p><p>The online edition loads Mightora's shared interface assets. The downloadable offline edition embeds its assets and works without an internet connection.</p></div><div class="privacy-actions"><a class="btn btn-outline" href="./downloads/mcp-builder-offline.html" download>Offline HTML</a><a class="btn btn-outline" href="./downloads/mcp-builder-offline.zip" download>Offline ZIP</a><details><summary>Inspect network activity</summary><p>The browser Performance API provides only a partial resource summary. Press F12 → Network, enable Preserve log, then reload for independent verification.</p><button type="button" class="btn btn-small btn-outline" id="showNetwork">Show observed domains</button><pre id="networkReport" class="network-report"></pre></details></div></div>
+      </div>
+    </section>
+  </main>
+
+  <mightora-author>
+    <div class="author-fallback">
+      <img src="./assets/ian-tweedie.png" alt="Ian Tweedie" onerror="this.style.display='none'">
+      <div><span class="section-kicker">MADE BY TECHTWEEDIE</span><h2>Built by Ian Tweedie.</h2><p>Mightora MCP Builder is a free, practical tool created by Ian, a solution architect and technology consultant based in North East England. <a href="https://techtweedie.github.io" target="_blank" rel="noopener noreferrer">Read the blog ↗</a></p></div>
+    </div>
+  </mightora-author>
+  <section class="quality-badges" aria-label="Open source and quality evidence">
+    <div class="container">
+      <p>Open source, independently inspectable and backed by real build and security workflows.</p>
+      <div class="badge-links">
+        <a href="https://github.com/mightora/mcp-builder.mightora.io/actions/workflows/pages.yml" target="_blank" rel="noopener noreferrer">Build and tests ↗</a>
+        <a href="https://github.com/mightora/mcp-builder.mightora.io/actions/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">CodeQL analysis ↗</a>
+        <a href="https://github.com/mightora/mcp-builder.mightora.io/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT licence ↗</a>
+        <a href="https://github.com/mightora/mcp-builder.mightora.io" target="_blank" rel="noopener noreferrer">GitHub source ↗</a>
+      </div>
+    </div>
+  </section>
+  <mightora-footer>
+    <footer class="fallback-footer"><div class="container"><span>MCP Builder by <a href="https://mightora.io">Mightora</a>.</span><span>Design. Secure. Deploy. · <a href="https://github.com/mightora/mcp-builder.mightora.io">Source code</a></span></div></footer>
+  </mightora-footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <!--BODY_ASSETS-->
+</body>
+</html>
